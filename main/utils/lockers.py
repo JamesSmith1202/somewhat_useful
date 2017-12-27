@@ -1,7 +1,7 @@
 #lockers
-import sqlite3, hashlib
+import sqlite3
 
-# Create locker - Adds locker information to the database
+# Create locker - Returns true if successful, false otherwise
 def create_locker(lockerID, email, floor, coords):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
@@ -15,7 +15,7 @@ def create_locker(lockerID, email, floor, coords):
     print "Locker Creation Failed"
     return False
 
-# Get lockers - Return string array of lockers associated with email
+# Get lockers - Return list of lockers associated with email
 def get_lockers(email):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
@@ -44,14 +44,16 @@ def get_floor(lockerID):
     for floor in c:
         return floor[0]
 
-# Get coords - Return the coordinates of the locker
+# Get coords - Return coordinates of the locker as a list
 def get_coords(lockerID):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     # Query for coords with lockerID
     c.execute("SELECT coords FROM lockers WHERE lockerID = '%s'" % (lockerID))
     for coords in c:
-        return coords[0]
+        # Turn string into a list
+        ret = eval(coords[0])
+        return ret
 
 # Set floor
 def set_floor(lockerID, new_floor):
