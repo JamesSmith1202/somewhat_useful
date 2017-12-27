@@ -7,3 +7,6 @@ added auth.py
 ngM -- 2017-12-27 11:08:53
 added lockers.py
 
+ngM -- 2017-12-27 11:43:27
+added offers.py
+

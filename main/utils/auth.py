@@ -16,7 +16,7 @@ def login(email, password):
     print "Login Failed"
     return False
 
-# Encrypt password - SHA256
+# Encrypt password - Returns SHA256
 def encrypt_password(password):
     encrypted = hashlib.sha256(password).hexdigest()
     return encrypted
