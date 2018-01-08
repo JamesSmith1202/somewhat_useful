@@ -13,3 +13,6 @@ added offers.py
 ngM -- 2017-12-27 11:54:37
 basic flask app setup
 
+jamesS -- 2018-01-08 14:45:07
+worked on flask and we cleared up confusions in design. finished login/create
+
