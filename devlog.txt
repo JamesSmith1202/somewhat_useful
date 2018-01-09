@@ -16,3 +16,6 @@ basic flask app setup
 jamesS -- 2018-01-08 14:45:07
 worked on flask and we cleared up confusions in design. finished login/create
 
+ngM -- 2018-01-09 14:46:39
+added offers.py functions
+

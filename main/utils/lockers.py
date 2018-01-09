@@ -105,4 +105,3 @@ def transfer_locker(lockerID, fromEmail, toEmail):
     db.commit()
     db.close()
     return True
-

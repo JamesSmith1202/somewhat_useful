@@ -16,6 +16,19 @@ def create_offer(lockerID, type, price, description):
     print "Offer Creation Failed"
     return False
 
+# Get offer - Returns dictionary of info
+def get_offer(lockerID):
+    db = sqlite3.connect("utils/database.db")
+    c = db.cursor()
+    c.execute("SELECT * FROM offers WHERE lockerID = '%s'" % (lockerID))
+
+    for offer in c:
+        type = offer[1]
+        price = offer[2]
+        description = offer[3]
+        dict = {"lockerID": lockerID, "type": type, "price": price, "description": description}
+        return dict
+    
 # Get price
 def get_price():
     db = sqlite3.connect("utils/database.db")
@@ -26,7 +39,7 @@ def get_price():
         return price[0]
 
 # Get description
-def get_price():
+def get_description():
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     # Query for description with lockerID and type
@@ -53,7 +66,7 @@ def set_price(lockerID, type, new_price):
     db.close()
 
 # Set description
-def set_floor(lockerID, type, new_description):
+def set_description(lockerID, type, new_description):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     # Update description to new_description
@@ -96,3 +109,16 @@ def accept_offer(lockerID, buyer, seller):
     db.close()
     return True
 
+# Get all offers - Returns array of offer dictionaries
+def get_all_offers():
+    db = sqlite3.connect("utils/database.db")
+    c = db.cursor()
+    offers = []
+    c.execute("SELECT * FROM offers")
+
+    # Append each offer dictionary to offers
+    for offer in c:
+        offers.append(get_offer(offer[0]))
+        
+    return offer_dict
+    

@@ -18,7 +18,7 @@ def login(email, password):
 
 # Encrypt password - Returns SHA256
 def encrypt_password(password):
-    encrypted = hashlib.sha256(password).hexdigest()
+    encrypted = hashlib.ha256(password).hexdigest()
     return encrypted
 
 # Create account - Returns true if successful, false otherwise
