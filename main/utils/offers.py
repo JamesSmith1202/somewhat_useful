@@ -120,5 +120,5 @@ def get_all_offers():
     for offer in c:
         offers.append(get_offer(offer[0]))
         
-    return offer_dict
+    return offers
     
