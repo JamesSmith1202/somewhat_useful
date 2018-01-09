@@ -8,18 +8,11 @@ import requests, os, time, json
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
 
-@app.route("/", methods=["GET"])
-def root():
-    return render_template('home.html')
-
-
-USER_SESSION = "logged_in"
-
-app = Flask(__name__)
-app.secret_key = os.urandom(16)
-
 def is_null(username, password, confpw):
     return username == "" or password == "" or confpw == ""
+
+def is_logged():
+    return USER_SESSION in session
 
 def add_session(username, password):
     if is_null(username, password, "filler"):
@@ -31,13 +24,14 @@ def add_session(username, password):
     else:
         flash("Incorrect login credentials")
         return False
-@app.route("/")
+
+@app.route("/", methods=["GET"])
 def root():
-    return render_template("home.html")
+    return render_template('home.html', logged = is_logged())
     
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    if USER_SESSION in session:
+    if is_logged():
         return redirect(url_for("root"))
     elif (request.method == "GET"):
         return render_template("login.html")
@@ -54,9 +48,24 @@ def login():
 
 @app.route("/logout")
 def logout():
-    if USER_SESSION in session:
+    if is_logged():
 		session.pop(USER_SESSION)
     return redirect(url_for("login"))
+
+@app.route("/offers")
+def offers():
+    return render_template("offers.html", offers = offer.get_all_offers(), logged = is_logged())
+
+@app.route("display")
+def display():
+    if id in request.args:
+        return render_template("display", offer = get_offer(request.args.get("id")))
+    else:
+        return redirect(url_for("offers"))
+
+@app.route("post.html")
+def post():
+
 
 
 if __name__ == "__main__":
