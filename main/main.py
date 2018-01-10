@@ -42,7 +42,7 @@ def login():
             if add_session(email, password):
                 return redirect(url_for("root"))
             else:
-                if not signup(email, password, request.form["confirm_password"]:
+                if not signup(email, password, request.form["confirm_password"]):
                     flash("Invalid Email: must be @stuy.edu email")
     return render_template("login.html")
 
@@ -56,17 +56,30 @@ def logout():
 def offers():
     return render_template("offers.html", offers = offer.get_all_offers(), logged = is_logged())
 
-@app.route("display")
+@app.route("/display")
 def display():
     if id in request.args:
         return render_template("display", offer = get_offer(request.args.get("id")))
     else:
         return redirect(url_for("offers"))
 
-@app.route("post.html")
+@app.route("/post", methods=["GET", "POST"])
 def post():
+    if not is_logged():
+        return redirect(url_for("login"))
+    if request.method == "GET":
+        return render_template("post.html", logged = is_logged())
+    else:
+        create_offer(request.form["lockerID"], request.form["type"], request.form["price"], request.form["desc"])
+        return redirect(url_for("profile"))
 
-
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
+    if not is_logged():
+        return redirect(url_for("login"))
+    if method.request == "GET":
+        locker_list = get_lockers(session[USER_SESSION])
+        return render_template("profile.html", logged = is_logged(), 
 
 if __name__ == "__main__":
     app.debug = True
