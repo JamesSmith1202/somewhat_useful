@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block title %}Create Post{% endblock %}
+{% block content %}
+
+<form method="POST">
+  <input type="text" name="lockerID" placeholder="Locker">
+  <br>
+  <input type="text" name="price" placeholder="Price">
+  <br>
+  <input type="text" name="type" placeholder="Type (0=sell, 1=trade)">
+  <br>
+  <textarea name="desc" rows="10" cols="75" placeholder="Type a description..."></textarea>
+  <br>
+  <br>
+  <input type="submit" name="create" value="Create Offer">
+</form>
+
+{% for message in get_flashed_messages() %}
+{{message}}
+{% endfor %}
+
+{% endblock %}

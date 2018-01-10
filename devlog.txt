@@ -22,3 +22,6 @@ added offers.py functions
 jamesS -- 2018-01-09 14:41:09
 continued working on flask app. ignored api for now...
 
+ngM -- 2018-01-10 14:37:20
+login.html and post.html
+
