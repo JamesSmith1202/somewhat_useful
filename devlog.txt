@@ -1,28 +1,28 @@
 jamesS -- 2017-12-21 20:05:14
 Initial startup of devlog bash script. Worked on design document and pushed initial materials
 
-ngM -- 2017-12-27 09:50:35
+marcusN -- 2017-12-27 09:50:35
 added auth.py
 
-ngM -- 2017-12-27 11:08:53
+marcusN -- 2017-12-27 11:08:53
 added lockers.py
 
-ngM -- 2017-12-27 11:43:27
+marcusN -- 2017-12-27 11:43:27
 added offers.py
 
-ngM -- 2017-12-27 11:54:37
+marcusN -- 2017-12-27 11:54:37
 basic flask app setup
 
 jamesS -- 2018-01-08 14:45:07
 worked on flask and we cleared up confusions in design. finished login/create
 
-ngM -- 2018-01-09 14:46:39
+marcusN -- 2018-01-09 14:46:39
 added offers.py functions
 
 jamesS -- 2018-01-09 14:41:09
 continued working on flask app. ignored api for now...
 
-ngM -- 2018-01-10 14:37:20
+marcusN -- 2018-01-10 14:37:20
 login.html and post.html
 
 jamesS -- 2018-01-10 14:43:51
@@ -33,4 +33,7 @@ css, html, debugging
 
 jamesS -- 2018-01-11 03:45:47
 some last minute debugging nad testing/prep for presentation
+
+marcusN -- 2018-01-11 05:37:01
+added create offers and display selling offers
 

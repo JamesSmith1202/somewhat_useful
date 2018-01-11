@@ -1,0 +1,23 @@
+{% extends "template.html" %}
+{% block title %}Locker {{offer["lockerID"]}}{% endblock %}
+{% block content %}
+
+<table>
+  <tr>
+    <th>Locker {{offer["lockerID"]}}</th>
+  </tr>
+  <tr>
+    <td>Price: ${{offer["price"]}}</td>
+  </tr>
+  <tr>
+    <td>Description: {{offer["description"]}}</td>
+  </tr>
+  <tr>
+    <td><strong>Pretend there's a contact email here</strong><td>
+  </tr>
+  <tr>
+    <td><strong>Also pretend there's a map here</strong></td>
+  </tr>
+</table>
+
+{% endblock %}  

@@ -20,7 +20,7 @@ def add_session(username, password):
     if is_null(username, password, "filler"):
         flash("Username or password is blank")
         return False
-    if(auth.login(username, password)):#if credentials match up in the db...
+    if(auth.login(username, password)):
             session[USER_SESSION] = username
             return True
     else:
@@ -55,7 +55,7 @@ def login():
 @app.route("/logout")
 def logout():
     if is_logged():
-		session.pop(USER_SESSION)
+        session.pop(USER_SESSION)
     return redirect(url_for("login"))
 
 @app.route("/offers")
@@ -64,10 +64,13 @@ def offer():
 
 @app.route("/display")
 def display():
-    if id in request.args:
-        return render_template("display", offer = get_offer(request.args.get("id")))
+    print "DISPLAY"
+    print request.args.get("lockerID")
+    if "lockerID" in request.args:
+        print "RENDER DISPLAY"
+        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID")))
     else:
-        return redirect(url_for("offers"))
+        return redirect(url_for("offer"))
 
 @app.route("/post", methods=["GET", "POST"])
 def post():
@@ -76,8 +79,8 @@ def post():
     if request.method == "GET":
         return render_template("post.html", logged = is_logged())
     else:
-        create_offer(request.form["lockerID"], request.form["type"], request.form["price"], request.form["desc"])
-        return redirect(url_for("profile"))
+        offers.create_offer(request.form["lockerID"], int(request.form["type"]), int(request.form["price"]), request.form["desc"])
+        return redirect(url_for("offer"))
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
