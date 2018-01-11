@@ -28,3 +28,6 @@ login.html and post.html
 jamesS -- 2018-01-10 14:43:51
 further work on routes
 
+jamesS -- 2018-01-11 03:16:55
+css, html, debugging
+

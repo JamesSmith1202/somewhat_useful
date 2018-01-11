@@ -1,19 +1,56 @@
 {% extends "template.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+    <center><font color="red">{{ message }}</font></center><br>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+<h2 class="text-center"> Log In </h2>
 
-<form method="POST">
-  <input type="text" name="email" placeholder="Email">
-  <br>
-  <input type="password" name="password" placeholder="Password">
-  <br>
-  <input type="submit" name="login" value="Login">
-  <br>
-  <input type="submit" name="register" value="Register">
+<div class="modal-body row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 container login">
+    <form method="POST" action="/login">
+      <div class="form-group">
+        <label for="user">Email</label>
+        <input name="email" type="text" class="form-control" id="email" placeholder="Enter an @stuy.edu email">
+      </div>
+      <div class="form-group">
+        <label for="pass">Password</label>
+        <input name="password" type="password" class="form-control" id="password" placeholder="Enter password">
+      </div>
+      <input class="btn btn-info btn-block" type="submit" name="form" value="login">
+    </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
+
+<h2 class="text-center"> Create account </h2>
+<br>
+<div class="modal-body row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 container login">
+    <form method="POST" action="/login">
+  <div class="form-group">
+    <label for="username0"> Email </label>
+    <input type="text" class="form-control" id="username0" name="email" placeholder="Enter an @stuy.edu email">
+  </div>
+  <div class="form-group">
+    <label for="password0"> Password </label>
+    <input type="password" class="form-control" id="password0" name="password" placeholder="Enter password">
+  </div>
+  <div class="form-group">
+    <label for="password1"> Confirm password </label>
+    <input type="password" class="form-control" id="password1" name="confirm_password" placeholder="Retype password">
+  </div>
+  <button class="btn btn-primary btn-block" type="submit" name="form" value="create">Submit</button>
 </form>
-
-{% for message in get_flashed_messages() %}
-{{message}}
-{% endfor %}
+   
+  </div>
+  <div class="col-md-4"></div>
+</div>
 
 {% endblock %}

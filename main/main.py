@@ -1,6 +1,6 @@
-from utils.auth import *
-from utils.lockers import *
-from utils.offers import *
+import utils.auth as auth
+import utils.lockers as lockers
+import utils.offers as offers
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash
 import requests, os, time, json
@@ -40,12 +40,16 @@ def login():
     else:
         email = request.form["email"]
         password = request.form["password"]
-        if "login" in request.form:
+        if request.form["form"] == "login":
             if add_session(email, password):
                 return redirect(url_for("root"))
+        else:
+            if(password != request.form["confirm_password"]):
+                flash("Passwords did not match")
+            elif not auth.create_account(email, password):
+                flash("Invalid Email: must be unique @stuy.edu email")
             else:
-                if not signup(email, password, request.form["confirm_password"]):
-                    flash("Invalid Email: must be @stuy.edu email")
+                flash("account creation successful")
     return render_template("login.html")
 
 @app.route("/logout")
@@ -55,7 +59,7 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/offers")
-def offers():
+def offer():
     return render_template("offers.html", offers = offers.get_all_offers(), logged = is_logged())
 
 @app.route("/display")
