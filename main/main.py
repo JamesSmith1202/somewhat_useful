@@ -5,6 +5,8 @@ from utils.offers import *
 from flask import Flask, redirect, url_for, render_template, session, request, flash
 import requests, os, time, json
 
+USER_SESSION = "logged_in"
+
 app = Flask(__name__)
 app.secret_key = os.urandom(64)
 
@@ -54,7 +56,7 @@ def logout():
 
 @app.route("/offers")
 def offers():
-    return render_template("offers.html", offers = offer.get_all_offers(), logged = is_logged())
+    return render_template("offers.html", offers = offers.get_all_offers(), logged = is_logged())
 
 @app.route("/display")
 def display():
@@ -78,8 +80,7 @@ def profile():
     if not is_logged():
         return redirect(url_for("login"))
     if method.request == "GET":
-        locker_list = get_lockers(session[USER_SESSION])
-        return render_template("profile.html", logged = is_logged(), 
+        return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = get_lockers(session[USER_SESSION]))
 
 if __name__ == "__main__":
     app.debug = True
