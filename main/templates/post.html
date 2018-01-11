@@ -1,19 +1,43 @@
 {% extends "template.html" %}
 {% block title %}Create Post{% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+    <center><font color="red">{{ message }}</font></center><br>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+<h2 class="text-center"> Create a Post</h2>
 
-<form method="POST">
-  <input type="text" name="lockerID" placeholder="Locker">
-  <br>
-  <input type="text" name="price" placeholder="Price">
-  <br>
-  <input type="text" name="type" placeholder="Type (0=sell, 1=trade)">
-  <br>
-  <textarea name="desc" rows="10" cols="75" placeholder="Type a description..."></textarea>
-  <br>
-  <br>
-  <input type="submit" name="create" value="Create Offer">
-</form>
+<div class="modal-body row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4 container login">
+    <form method="POST" action="/login">
+      <div class="form-group">
+        <label for="Id"> LockerID </label>
+        <input type="text" name="lockerID" placeholder="Locker">
+      </div>
+      <div class="form-group">
+        <label for="price">Price(if selling) </label>
+        <input type="text" name="price" placeholder="Price">
+      </div>
+      <div class="form-group">
+          <label for="type"> Sell or Trade </label>
+          <select name="type" placeholder="Sell or trade">
+            <option value="0">Sell</option>
+            <option value="1">Trade</option>
+          </select>
+      </div>
+      <div class="form-group-lg">
+        <label for="desc"> Description </label>
+        <textarea name="desc" class="form-control input-lg" rows="5" placeholder="Type a description..."></textarea>
+      </div>
+      <input class="btn btn-info btn-block" type="submit" name="create" value="Create Post">
+    </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>
 
 {% for message in get_flashed_messages() %}
 {{message}}

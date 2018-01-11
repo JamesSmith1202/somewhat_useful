@@ -83,8 +83,8 @@ def post():
 def profile():
     if not is_logged():
         return redirect(url_for("login"))
-    if method.request == "GET":
-        return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = get_lockers(session[USER_SESSION]))
+    if request.method == "GET":
+        return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]))
 
 if __name__ == "__main__":
     app.debug = True
