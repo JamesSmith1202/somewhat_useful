@@ -64,11 +64,8 @@ def offer():
 
 @app.route("/display")
 def display():
-    print "DISPLAY"
-    print request.args.get("lockerID")
-    if "lockerID" in request.args:
-        print "RENDER DISPLAY"
-        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID")))
+    if "lockerID" in request.args and "type" in request.args:
+        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))))
     else:
         return redirect(url_for("offer"))
 

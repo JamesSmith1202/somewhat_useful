@@ -14,7 +14,7 @@
   </tr>
   {% for locker in offers %}
   <tr>
-    <td><a href={{"/display?lockerID="~locker["lockerID"]}}>{{locker["lockerID"]}}</a></td>
+    <td><a href={{"/display?lockerID="~locker["lockerID"] + "&type="~locker["type"]}}>{{locker["lockerID"]}}</a></td>
   </tr>
   {% endfor %}
   <tr>

@@ -4,7 +4,6 @@ import lockers
 
 # Create offer - Returns true if successful, false otherwise
 def create_offer(lockerID, type, price, description):
-    print lockerID, type, price, description
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     if not does_offer_exist(lockerID, type):
@@ -18,13 +17,12 @@ def create_offer(lockerID, type, price, description):
     return False
 
 # Get offer - Returns dictionary of info
-def get_offer(lockerID): # NEED TO ADD TYPE***
+def get_offer(lockerID, type):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
-    c.execute("SELECT * FROM offers WHERE lockerID = '%s'" % (lockerID))
+    c.execute("SELECT * FROM offers WHERE lockerID = '%s' AND type = %d" % (lockerID, type))
 
     for offer in c:
-        type = offer[1]
         price = offer[2]
         description = offer[3]
         dict = {"lockerID": lockerID, "type": type, "price": price, "description": description}
@@ -119,7 +117,7 @@ def get_all_offers():
 
     # Append each offer dictionary to offers
     for offer in c:
-        offers.append(get_offer(offer[0]))
+        offers.append(get_offer(offer[0], offer[1]))
         
     return offers
     

@@ -37,3 +37,6 @@ some last minute debugging nad testing/prep for presentation
 marcusN -- 2018-01-11 05:37:01
 added create offers and display selling offers
 
+marcusN -- 2018-01-11 19:17:13
+refactored offer query
+
