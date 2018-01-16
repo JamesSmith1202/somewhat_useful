@@ -85,7 +85,11 @@ def profile():
         return redirect(url_for("login"))
     if request.method == "GET":
         return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]))
-
+    elif request.method == "POST":
+        locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
+        if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
+            return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]))
+            
 if __name__ == "__main__":
     app.debug = True
     app.run()

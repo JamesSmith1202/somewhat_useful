@@ -1,6 +1,6 @@
 {% extends "template.html" %}
-{%block title %}{{username}}'s Profile{% endblock %}
-{%block content %}
+{% block title %}{{username}}'s Profile{% endblock %}
+{% block content %}
 <h1>{{username}}'s profile</h1>
 <ul>
     <li>Will diplay all lockers owned by the user</li>
@@ -9,4 +9,18 @@
     <li>Will display trade requests</li>
     <li>User will be able to change their password</li>
 </ul>
-{%endblock%}  
+
+<form method="POST" action="/profile">
+  <input type="text" name="lockerID" placeholder="Locker ID">
+  <br>
+  <input type="text" name="floor" placeholder="Floor #">
+  <br>
+  <input type="text" name="coords" placeholder="Coordinates ex: [0,0]">
+  Map!
+  <br>
+  <input type="submit" name="add" value="Add Locker">
+</form>
+
+{{lockers}}
+
+{% endblock %}  

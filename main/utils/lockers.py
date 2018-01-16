@@ -15,15 +15,16 @@ def create_locker(lockerID, email, floor, coords):
     print "Locker Creation Failed"
     return False
 
-# Get lockers - Return list of lockers associated with email
+# Get lockers - Return list of locker info associated with email
 def get_lockers(email):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     lockers = []
     # Query for lockers with email
-    c.execute("SELECT lockerID FROM lockers WHERE email = '%s'" % (email))
-    for locker_id in c:
-        lockers.append(locker_id[0])
+    c.execute("SELECT * FROM lockers WHERE email = '%s'" % (email))
+    for locker in c:
+        dict = {"lockerID": locker[0], "floor": locker[2], "coords": locker[3]}
+        lockers.append(dict)
     return lockers
 
 # Get email - Return the email associated with the locker
