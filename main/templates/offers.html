@@ -16,8 +16,8 @@
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
-      <p class="card-text">Price: {{locker["price"]}}</p>
-      <a href={{"/display?lockerID="~locker["lockerID"] + "&type="~locker["type"]}}>{{locker["lockerID"]}} class="btn btn-primary">View Offer</a>
+      <p class="card-text">Price: ${{locker["price"]}}</p>
+      <a href='{{"/display?lockerID="~locker["lockerID"] + "&type="~locker["type"]}}' class="btn btn-primary">View Offer</a>
     </div>
   </div>
   <br>

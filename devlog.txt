@@ -40,3 +40,6 @@ added create offers and display selling offers
 marcusN -- 2018-01-11 19:17:13
 refactored offer query
 
+marcusN -- 2018-01-17 14:50:11
+added card views
+
