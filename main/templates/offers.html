@@ -8,18 +8,22 @@
         <li>Clicking on a locker goes to a page to display all locker information</li>
 </ul>
 
-<table>
-  <tr>
-    <th>Selling</th>
-  </tr>
+<h2>Selling</h2>
+
+<div class="card-deck">
   {% for locker in offers %}
-  <tr>
-    <td><a href={{"/display?lockerID="~locker["lockerID"] + "&type="~locker["type"]}}>{{locker["lockerID"]}}</a></td>
-  </tr>
+  <div class="card" style="width: 20rem;">
+    <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
+    <div class="card-block">
+      <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
+      <p class="card-text">Price: {{locker["price"]}}</p>
+      <a href={{"/display?lockerID="~locker["lockerID"] + "&type="~locker["type"]}}>{{locker["lockerID"]}} class="btn btn-primary">View Offer</a>
+    </div>
+  </div>
+  <br>
   {% endfor %}
-  <tr>
-    <th>Trading</th>
-  </tr>
-</table>
+</div>
+
+<h2>Trading</h2>
 
 {% endblock %}  
