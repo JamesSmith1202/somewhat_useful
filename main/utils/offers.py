@@ -120,4 +120,18 @@ def get_all_offers():
         offers.append(get_offer(offer[0], offer[1]))
         
     return offers
+
+# Get latest offers - Return n latest sales or trades
+def get_latest_offers(n, type):
+    db = sqlite3.connect("utils/database.db")
+    c = db.cursor()
+    offers = []
+    c.execute("SELECT * FROM offers WHERE type = %d ORDER BY price LIMIT %d" % (type, n))
+    
+    # Append each offer dictionary to offers
+    for offer in c:
+        offers.append(get_offer(offer[0], offer[1]))
+
+    print offers
+    return offers
     

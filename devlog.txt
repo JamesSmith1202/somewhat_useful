@@ -43,3 +43,6 @@ refactored offer query
 marcusN -- 2018-01-17 14:50:11
 added card views
 
+marcusN -- 2018-01-18 14:32:04
+get_latest_offers (sorted by price atm)
+

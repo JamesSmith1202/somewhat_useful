@@ -29,7 +29,7 @@ def add_session(username, password):
 
 @app.route("/", methods=["GET"])
 def root():
-    return render_template('home.html', logged = is_logged())
+    return render_template('home.html', logged = is_logged(), lockers_selling = offers.get_latest_offers(4,0), lockers_trading = offers.get_latest_offers(4,1))
     
 @app.route("/login", methods=["GET", "POST"])
 def login():
