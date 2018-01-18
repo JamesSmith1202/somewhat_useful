@@ -28,8 +28,13 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+
 .footerhdr{
   font-size: 10px;
+}
+
+.footer {
+	background-color: #7aa2b3;
 }
 
 h1{
