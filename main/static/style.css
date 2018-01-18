@@ -76,6 +76,13 @@ li {
 
 #right { display:none; } 
 
+#toggle {
+}
+
+#linkit {
+    cursor:pointer;
+	color: blue;
+}
 
 nav-item {
 	

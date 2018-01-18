@@ -6,16 +6,11 @@ Home
 
 {% block content %}
 <br>
-<h1>Home</h1>
-This is where we will have our 5 most recent trading and selling posts!
-<br>
-<br>
-<br>
-<br>
+<h1> Recent Posts</h1><br>
 <br>
 <br>
 
-<h1>Selling</h1>
+<h2>Selling</h2>
 <div class="card-deck">
   {% for locker in lockers_selling %}
   <div class="card" style="width: 20rem;">
@@ -32,7 +27,7 @@ This is where we will have our 5 most recent trading and selling posts!
 
 <br>
 
-<h1>Trading</h1>
+<h2>Trading</h2>
 <div class="card-deck">
   {% for locker in lockers_trading %}
   <div class="card" style="width: 20rem;">
