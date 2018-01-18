@@ -1,14 +1,28 @@
 {% extends "template.html" %}
 {% block title %}Login{% endblock %}
 {% block content %}
+<br><br>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
   {% for message in messages %}
-    <center><font color="red">{{ message }}</font></center><br>
+    <center><div class="alert alert-danger">{{ message }}</div></center><br>
   {% endfor %}
 {% endif %}
 {% endwith %}
-<h2 class="text-center"> Log In </h2>
+
+<script type="text/javascript">
+        $(function() {        
+$('#toggle > span').click(function() {
+    var ix = $(this).index();
+
+    $('#left').toggle( ix === 0 );
+    $('#right').toggle( ix === 1 );
+});        });
+    </script> 
+    
+
+
+<div id="left"> <h2 class="text-center"> Log In </h2>
 
 <div class="modal-body row">
   <div class="col-md-4"></div>
@@ -24,11 +38,18 @@
       </div>
       <input class="btn btn-info btn-block" type="submit" name="form" value="login">
     </form>
+<p id="toggle">Don't have an account? Create <span>one </span>
+   <span> Here! </span>
+</p>
   </div>
   <div class="col-md-4"></div>
-</div>
+</div> </div>
 
-<h2 class="text-center"> Create Account </h2>
+
+
+
+
+<div id="right"> <h2 class="text-center"> Create Account </h2>
 <br>
 <div class="modal-body row">
   <div class="col-md-4"></div>
@@ -51,6 +72,22 @@
    
   </div>
   <div class="col-md-4"></div>
-</div>
+</div> </div>
+
+
 
 {% endblock %}
+{% block customscript %}
+
+   <script>
+        $(function() {        
+$('#toggle > span').click(function() {
+    var ix = $(this).index();
+    
+    $('#left').toggle( ix === 0 );
+    $('#right').toggle( ix === 1 );
+});        });
+    </script>  
+
+{% endblock %}
+  
