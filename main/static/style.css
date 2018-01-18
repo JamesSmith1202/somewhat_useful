@@ -8,10 +8,11 @@ body {
   padding-bottom: 10px;
 }
 .content{
-	text-align: left;
+  text-align: left;
   padding-left: 50px;
   padding-right: 50px;
 }
+
 .lyrics.musiclist {
   padding-left: 80px;
   padding-right: 80px;
@@ -33,7 +34,7 @@ body {
 
 h1{
   color: #FF545C;
-}
+} 
 
 .navbar-center {
     position: absolute;
@@ -44,20 +45,33 @@ h1{
 a{
   color: #FF545C;
 }
-/* navbar */
-.navbar-default .navbar{
-    background-color: ##1C2C3D;
-    border-color: #E7E7E7;
-}
-/* Title */
-.navbar-default .navbar-brand {
-    color: ##1C2C3D;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-    color: #5E5E5E;
+
+ul{
+	list-style-type: none;
 }
 
-.row-border{
-	border-top: 3px solid #afb8c6;
+li {
+	list-style-type: none;
+
+}
+  .dropdown-menu > li > a:hover,
+   .dropdown-menu > li > a:focus {
+    color: #325568;
+   text-decoration: none;
+  background-color: #325568;  /*change color of links in drop down here*/
+ 	list-style-type: none;
+
+   } 
+   
+   /* navbar */
+.navbar-inverse {
+    background-color: #325568;
+    border-color: #325568;
+}
+
+
+
+nav-item {
+	
+	margin-top: 0px;
 }
