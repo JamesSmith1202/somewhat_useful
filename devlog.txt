@@ -46,3 +46,6 @@ added card views
 marcusN -- 2018-01-18 14:32:04
 get_latest_offers (sorted by price atm)
 
+marcusN -- 2018-01-19 14:43:33
+edit html
+

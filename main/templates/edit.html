@@ -1,26 +1,26 @@
 {% extends "template.html" %}
-{% block title %}Create Post{% endblock %}
+{% block title %}Edit Locker{% endblock %}
 {% block content %}
+
 {% with messages = get_flashed_messages() %}
-{% if messages %}
-  {% for message in messages %}
-    <center><font color="red">{{ message }}</font></center><br>
-  {% endfor %}
-{% endif %}
+{% for message in messages %}
+<center><font color="red">{{ message }}</font></center><br>
+{% endfor %}
 {% endwith %}
-<h2 class="text-center"> Create a Post</h2>
+
+<h2 class="text-center">Edit Locker</h2>
 
 <div class="modal-body row">
   <div class="col-md-4"></div>
   <div class="col-md-4 container login">
-    <form method="POST" action="/post">
+    <form method="POST" action="/offers">
       <div class="form-group">
         <label for="Id"> LockerID </label>
-        <input type="text" name="lockerID" placeholder="Locker">
+        <input type="text" name="lockerID" placeholder="Locker" value={{locker["lockerID"]}}>
       </div>
       <div class="form-group">
         <label for="price">Price(if selling) </label>
-        <input type="text" name="price" placeholder="Price">
+        <input type="text" name="price" placeholder="Price" value={{locker["price"]}}>
       </div>
       <div class="form-group">
           <label for="type"> Sell or Trade </label>
@@ -31,9 +31,9 @@
       </div>
       <div class="form-group-lg">
         <label for="desc"> Description </label>
-        <textarea name="desc" class="form-control input-lg" rows="5" placeholder="Type a description..."></textarea>
+        <textarea name="desc" class="form-control input-lg" rows="5" placeholder="Type a description...">{{locker["description"]}}</textarea>
       </div>
-      <input class="btn btn-info btn-block" type="submit" name="create" value="Create Post">
+      <input class="btn btn-info btn-block" type="submit" name="update" value="Update Post">
     </form>
   </div>
   <div class="col-md-4"></div>

@@ -132,6 +132,5 @@ def get_latest_offers(n, type):
     for offer in c:
         offers.append(get_offer(offer[0], offer[1]))
 
-    print offers
     return offers
     
