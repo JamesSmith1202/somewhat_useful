@@ -49,3 +49,6 @@ get_latest_offers (sorted by price atm)
 marcusN -- 2018-01-19 14:43:33
 edit html
 
+smithJ -- 2018-01-19 14:55:29
+got canvas resizing and dot placement working for the map
+
