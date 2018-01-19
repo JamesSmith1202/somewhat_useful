@@ -3,76 +3,65 @@
 {% block content %}
 <br><br>
 {% with messages = get_flashed_messages() %}
-{% if messages %}
-  {% for message in messages %}
-    <center><div class="alert alert-danger">{{ message }}</div></center><br>
-  {% endfor %}
-{% endif %}
+{% for message in messages %}
+<center><div class="alert alert-danger">{{ message }}</div></center><br>
+{% else %}
+<h1><br><br></h1>
+{% endfor %}
+
 {% endwith %}
 
-<script type="text/javascript">
-        $(function() {        
-$('#toggle > span').click(function() {
-    var ix = $(this).index();
 
-    $('#left').toggle( ix === 0 );
-    $('#right').toggle( ix === 1 );
-});        });
-    </script> 
-    
-
-<br>
-<br>
 <div id="left"> <h2 class="text-center"> Log In </h2>
 
-<div class="modal-body row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4 container login">
-    <form method="POST" action="/login">
-      <div class="form-group">
-        <label for="user">Email</label>
-        <input name="email" type="text" class="form-control" id="email" placeholder="Enter an @stuy.edu email">
-      </div>
-      <div class="form-group">
-        <label for="pass">Password</label>
-        <input name="password" type="password" class="form-control" id="password" placeholder="Enter password">
-      </div>
-      <input class="btn btn-info btn-block" type="submit" name="form" value="Login">
-    </form>
-<p style="padding-top: 10px;" id="toggle">Don't have an account? Create one
-   <span id="linkit"> Here! </span>
-</p>
-  </div>
-  <div class="col-md-4"></div>
+  <div class="modal-body row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 container login">
+      <form method="POST" action="/login">
+	<div class="form-group">
+          <label for="user">Email</label>
+          <input name="email" type="text" class="form-control" id="email" placeholder="Enter an @stuy.edu email">
+	</div>
+	<div class="form-group">
+          <label for="pass">Password</label>
+          <input name="password" type="password" class="form-control" id="password" placeholder="Enter password">
+	</div>
+	<input class="btn btn-info btn-block" type="submit" name="form" value="Login">
+      </form>
+      <p style="padding-top: 10px;" id="toggle">Don't have an account? Create one
+	<span id="linkit"> Here! </span></p>
+</div></p>
+<div class="col-md-4"></div>
 </div> </div>
 
 
 
 
-<br><br>
+
 <div id="right"> <h2 class="text-center"> Create Account </h2>
-<br>
-<div class="modal-body row">
-  <div class="col-md-4"></div>
-  <div class="col-md-4 container login">
-    <form method="POST" action="/login">
-  <div class="form-group">
-    <label for="username0"> Email </label>
-    <input type="text" class="form-control" id="username0" name="email" placeholder="Enter an @stuy.edu email">
-  </div>
-  <div class="form-group">
-    <label for="password0"> Password </label>
-    <input type="password" class="form-control" id="password0" name="password" placeholder="Enter password">
-  </div>
-  <div class="form-group">
-    <label for="password1"> Confirm password </label>
-    <input type="password" class="form-control" id="password1" name="confirm_password" placeholder="Retype password">
-  </div>
-  <button class="btn btn-primary btn-block" type="submit" name="form" value="create">Submit</button>
-</form>
-   
-  </div>
-  <div class="col-md-4"></div>
+  <br>
+  <div class="modal-body row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 container login">
+      <form method="POST" action="/login">
+	<div class="form-group">
+	  <label for="username0"> Email </label>
+	  <input type="text" class="form-control" id="username0" name="email" placeholder="Enter an @stuy.edu email">
+	</div>
+	<div class="form-group">
+	  <label for="password0"> Password </label>
+	  <input type="password" class="form-control" id="password0" name="password" placeholder="Enter password">
+	</div>
+	<div class="form-group">
+	  <label for="password1"> Confirm password </label>
+	  <input type="password" class="form-control" id="password1" name="confirm_password" placeholder="Retype password">
+	</div>
+	<button class="btn btn-primary btn-block" type="submit" name="form" value="create">Submit</button>
+      </form>
+      <p style="padding-top: 10px;" id="toggle">Back to 
+	<span id="linkit"> Login! </span>
+</div></p>
+<div class="col-md-4"></div>
 </div> </div>
 
 
@@ -80,15 +69,15 @@ $('#toggle > span').click(function() {
 {% endblock %}
 {% block customscript %}
 
-   <script>
-        $(function() {        
-$('#toggle > span').click(function() {
-    var ix = $(this).index();
-    
-    $('#left').toggle( ix === 1 );
-    $('#right').toggle( ix === 0 );
-});        });
-    </script>  
+<script>
+  $(function() {        
+  $('#toggle > span').click(function() {
+  var ix = $(this).index();
+  
+  $('#left').toggle( ix === 1 );
+  $('#right').toggle( ix === 0 );
+  });        });
+</script>  
 
 {% endblock %}
-  
+

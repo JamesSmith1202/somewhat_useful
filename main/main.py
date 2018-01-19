@@ -21,8 +21,8 @@ def add_session(username, password):
         flash("Username or password is blank")
         return False
     if(auth.login(username, password)):
-            session[USER_SESSION] = username
-            return True
+        session[USER_SESSION] = username
+        return True
     else:
         flash("Incorrect login credentials")
         return False
@@ -30,7 +30,7 @@ def add_session(username, password):
 @app.route("/", methods=["GET"])
 def root():
     return render_template('home.html', logged = is_logged(), lockers_selling = offers.get_latest_offers(4,0), lockers_trading = offers.get_latest_offers(4,1))
-    
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if is_logged():
@@ -40,16 +40,16 @@ def login():
     else:
         email = request.form["email"]
         password = request.form["password"]
-        if request.form["form"] == "login":
+        if request.form["form"] == "Login":
             if add_session(email, password):
                 return redirect(url_for("root"))
         else:
             if(password != request.form["confirm_password"]):
-                flash("Passwords did not match")
+                flash("Oops! Your Password and Confirm Password did not match. :(")
             elif not auth.create_account(email, password):
-                flash("Invalid Email: must be unique @stuy.edu email")
+                flash("Invalid Email Address: It must be a  @stuy.edu email address that has not been previously registered.")
             else:
-                flash("account creation successful")
+                flash("Congratulations! You have created an account successfully. :)")
     return render_template("login.html")
 
 @app.route("/logout")
@@ -89,7 +89,7 @@ def profile():
         locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
         if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
             return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]))
-            
+        
 if __name__ == "__main__":
     app.debug = True
     app.run()
