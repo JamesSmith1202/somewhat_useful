@@ -41,10 +41,20 @@
 </form>
 {% endif %}
 
+<br>
+
+<b>Contact </b>
+<form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
+  <input type="text" name="to" value={{offer["email"]}}><br>
+  <input type="text" name="subject" placeholder="Subject"><br>
+  <input type="text" name="message" placeholder="Message"><br>
+  <input type="submit" name="email" value="Send Email">
+</form>
+
 {% with messages = get_flashed_messages() %}
 {% for message in messages %}
 <center><font color="red">{{ message }}</font></center><br>
 {% endfor %}
 {% endwith %}
 
-{% endblock %}  
+{% endblock %}

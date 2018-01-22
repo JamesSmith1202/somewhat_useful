@@ -2,6 +2,7 @@ import utils.auth as auth
 import utils.lockers as lockers
 import utils.offers as offers
 import utils.trades as trades
+import utils.quickstart as quickstart
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash
 import requests, os, time, json
@@ -67,6 +68,14 @@ def offer():
 def display():
     if "lockerID" in request.args and "type" in request.args:
         if request.method == "POST":
+            if request.form["email"] != "":
+                to = request.form["to"]
+                sender = ""
+                subject = request.form["subject"]
+                msgHtml = request.form["message"]
+                msgPlain = ""
+                quickstart.SendMessage(sender, to, subject, msgHtml, msgPlain)
+                return redirect(url_for("display"))
             if request.form["your_lockerID"] != "":
                 lockerID = request.args.get("lockerID")
                 to_email = lockers.get_email(lockerID)
