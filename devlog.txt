@@ -58,3 +58,6 @@ added trade table, trade functions, card UI
 marcusN -- 2018-01-21 22:17:01
 trades work
 
+marcusN -- 2018-01-21 23:14:35
+edit offers
+

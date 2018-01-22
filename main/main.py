@@ -83,9 +83,33 @@ def display():
             else:
                 print "No locker selected"
                 flash("Please select a locker to trade")
-        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged()) 
+        if is_logged():
+            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION])
+        
+        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged())
     else:
         return redirect(url_for("offer"))
+
+@app.route("/edit", methods=["POST"])
+def edit():
+    if request.method == "POST":
+        lockerID = request.form["lockerID"]
+        type = request.form["type"]
+        price = request.form["price"]
+        description = request.form["description"]
+        if "update" in request.form:
+            print "Update offer"
+            offers.set_price(lockerID, int(type), int(price))
+            offers.set_type(lockerID, int(type), int(request.form["new_type"]))
+            offers.set_description(lockerID, int(type), description)
+            offers.set_lockerID(lockerID, int(type), request.form["new_lockerID"])
+        elif "delete" in request.form:
+            print "Delete Offer"
+            offers.remove_offer(lockerID, int(type))
+        else:
+            dict = {"lockerID": request.form["lockerID"], "price": request.form["price"], "type": request.form["type"], "description": request.form["description"]}
+            return render_template("edit.html", offer = dict, logged = is_logged())
+    return redirect(url_for("offer"))
 
 @app.route("/post", methods=["GET", "POST"])
 def post():
@@ -108,6 +132,11 @@ def profile():
         elif "deny" in request.form:
             print "Deny request"
             trades.remove_trade(request.form["lockerID"], request.form["your_lockerID"], request.form["to_email"], request.form["from_email"])
+        elif "delete" in request.form:
+            print "Delete locker"
+            lockers.remove_locker(request.form["lockerID"])
+            offers.remove_offer(request.form["lockerID"], 0)
+            offers.remove_offer(request.form["lockerID"], 1)              
         else:
             locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
             if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):

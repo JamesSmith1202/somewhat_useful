@@ -38,8 +38,10 @@
   <div class="card-block">
     <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
     <p class="card-text">Floor: {{locker["floor"]}}</p>
-    <a href="#" class="btn btn-primary">Edit</a>
-    <a href="#" class="btn btn-primary">Delete</a>
+    <form method="POST" action="/profile">
+      <input type="hidden" name="lockerID" value='{{locker["lockerID"]}}'>
+      <input type="submit" name="delete" value="Delete" class="btn btn-primary">
+    </form>
   </div>
 </div>
 <br>

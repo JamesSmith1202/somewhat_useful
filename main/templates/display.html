@@ -22,6 +22,18 @@
   </tr>
 </table>
 
+{% if offer["email"] == current_user_email %}
+<form method="POST" action="/edit">
+  <input type="hidden" name="lockerID" value='{{offer["lockerID"]}}'>
+  <input type="hidden" name="type" value='{{offer["type"]}}'>
+  <input type="hidden" name="price" value='{{offer["price"]}}'>
+  <input type="hidden" name="description" value='{{offer["description"]}}'>
+  <input type="submit" name="edit" value="Edit" class="btn btn-primary">
+</form>
+{% endif %}
+
+<br>
+
 {% if offer["type"] == 1 %}
 <form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
   <input type="text" name="your_lockerID" placeholder="Your LockerID">

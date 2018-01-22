@@ -46,6 +46,15 @@ def get_description():
     for description in c:
         return description[0]
 
+# Set lockerID
+def set_lockerID(lockerID, type, new_lockerID):
+    db = sqlite3.connect("utils/database.db")
+    c = db.cursor()
+    # Update type to new_lockerID
+    c.execute("UPDATE offers SET lockerID = '%s' WHERE lockerID = '%s' AND type = %d" % (new_lockerID, lockerID, type))
+    db.commit()
+    db.close()
+    
 # Set type
 def set_type(lockerID, type, new_type):
     db = sqlite3.connect("utils/database.db")
@@ -69,7 +78,7 @@ def set_description(lockerID, type, new_description):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     # Update description to new_description
-    c.execute("UPDATE offers SET description = %d WHERE lockerID = '%s' AND type = %d" % (new_description, lockerID, type))
+    c.execute("UPDATE offers SET description = '%s' WHERE lockerID = '%s' AND type = %d" % (new_description, lockerID, type))
     db.commit()
     db.close()
 

@@ -8,32 +8,37 @@
 {% endfor %}
 {% endwith %}
 
+<br><br>
+
 <h2 class="text-center">Edit Locker</h2>
 
 <div class="modal-body row">
   <div class="col-md-4"></div>
   <div class="col-md-4 container login">
-    <form method="POST" action="/offers">
+    <form method="POST" action="/edit">
       <div class="form-group">
         <label for="Id"> LockerID </label>
-        <input type="text" name="lockerID" placeholder="Locker" value={{locker["lockerID"]}}>
+	<input type="hidden" name="lockerID" value='{{offer["lockerID"]}}'>
+        <input type="text" name="new_lockerID" placeholder="Locker" value='{{offer["lockerID"]}}'>
       </div>
       <div class="form-group">
         <label for="price">Price(if selling) </label>
-        <input type="text" name="price" placeholder="Price" value={{locker["price"]}}>
+        <input type="text" name="price" placeholder="Price" value='{{offer["price"]}}'>
       </div>
       <div class="form-group">
-          <label for="type"> Sell or Trade </label>
-          <select name="type" placeholder="Sell or trade">
-            <option value="0">Sell</option>
-            <option value="1">Trade</option>
-          </select>
+        <label for="type"> Sell or Trade </label>
+	<input type="hidden" name="type" value='{{offer["type"]}}'>
+        <select name="new_type" placeholder="Sell or trade">
+          <option value="0">Sell</option>
+          <option value="1">Trade</option>
+        </select>
       </div>
       <div class="form-group-lg">
-        <label for="desc"> Description </label>
-        <textarea name="desc" class="form-control input-lg" rows="5" placeholder="Type a description...">{{locker["description"]}}</textarea>
+        <label for="description"> Description </label>
+        <textarea name="description" class="form-control input-lg" rows="5" placeholder="Add a description...">{{offer["description"]}}</textarea>
       </div>
-      <input class="btn btn-info btn-block" type="submit" name="update" value="Update Post">
+      <input class="btn btn-info btn-block" type="submit" name="update" value="Update Offer">
+      <input class="btn btn-info btn-block" type="submit" name="delete" value="Delete Offer">
     </form>
   </div>
   <div class="col-md-4"></div>
