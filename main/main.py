@@ -1,6 +1,7 @@
 import utils.auth as auth
 import utils.lockers as lockers
 import utils.offers as offers
+import utils.trades as trades
 
 from flask import Flask, redirect, url_for, render_template, session, request, flash
 import requests, os, time, json
@@ -62,10 +63,27 @@ def logout():
 def offer():
     return render_template("offers.html", offers = offers.get_all_offers(), logged = is_logged())
 
-@app.route("/display")
+@app.route("/display", methods=["GET", "POST"])
 def display():
     if "lockerID" in request.args and "type" in request.args:
-        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))))
+        if request.method == "POST":
+            if request.form["your_lockerID"] != "":
+                lockerID = request.args.get("lockerID")
+                to_email = lockers.get_email(lockerID)
+                if to_email != session[USER_SESSION]:
+                    if trades.create_trade(lockerID, request.form["your_lockerID"], to_email, session[USER_SESSION]):
+                        print "Trade Request Sent"
+                        flash("Trade request sent")
+                    else:
+                        print "Error: Request exists!"
+                        flash("Error sending trade request: Request exists!")
+                else:
+                    print "Error: This is your offer!"
+                    flash("Error sending trade request: This is your offer!")
+            else:
+                print "No locker selected"
+                flash("Please select a locker to trade")
+        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged()) 
     else:
         return redirect(url_for("offer"))
 
@@ -83,13 +101,21 @@ def post():
 def profile():
     if not is_logged():
         return redirect(url_for("login"))
-    if request.method == "GET":
-        return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]))
-    elif request.method == "POST":
-        locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
-        if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
-            return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]))
-        
+    if request.method == "POST":
+        if "accept" in request.form:
+            print "Accept request"
+            trades.accept_trade(request.form["lockerID"], request.form["your_lockerID"], request.form["to_email"], request.form["from_email"])
+        elif "deny" in request.form:
+            print "Deny request"
+            trades.remove_trade(request.form["lockerID"], request.form["your_lockerID"], request.form["to_email"], request.form["from_email"])
+        else:
+            locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
+            if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
+                return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
+            else:
+                flash("Locker exists")
+    return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

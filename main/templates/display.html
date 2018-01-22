@@ -6,18 +6,33 @@
   <tr>
     <th>Locker {{offer["lockerID"]}}</th>
   </tr>
+  {% if offer["type"] == 0 %}
   <tr>
     <td>Price: ${{offer["price"]}}</td>
   </tr>
+  {% endif %}
   <tr>
     <td>Description: {{offer["description"]}}</td>
   </tr>
   <tr>
-    <td><strong>Pretend there's a contact email here</strong><td>
+    <td>Seller: {{offer["email"]}}<td>
   </tr>
   <tr>
-    <td><strong>Also pretend there's a map here</strong></td>
+    <td><strong>ADD THE MAP</strong></td>
   </tr>
 </table>
+
+{% if offer["type"] == 1 %}
+<form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
+  <input type="text" name="your_lockerID" placeholder="Your LockerID">
+  <input type="submit" name="send" value="Send Trade Request">
+</form>
+{% endif %}
+
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<center><font color="red">{{ message }}</font></center><br>
+{% endfor %}
+{% endwith %}
 
 {% endblock %}  

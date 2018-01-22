@@ -11,7 +11,7 @@
 </ul>
 
 <form method="POST" action="/profile">
-  <input type="text" name="lockerID" placeholder="Locker ID">
+  <input type="text" name="lockerID" placeholder="Locker ID (ex: 2-152)">
   <br>
   <input type="text" name="floor" placeholder="Floor #">
   <br>
@@ -21,6 +21,12 @@
   <input type="submit" name="add" value="Add Locker">
 </form>
 
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<center><font color="red">{{ message }}</font></center><br>
+{% endfor %}
+{% endwith %}
+    
 <br>
 
 <h2>Your Lockers</h2>
@@ -31,12 +37,39 @@
   <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
   <div class="card-block">
     <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
-    <p class="card-text">Floor: ${{locker["floor"]}}</p>
-    <a href="#" class="btn btn-primary">Zoom zoom</a>
+    <p class="card-text">Floor: {{locker["floor"]}}</p>
+    <a href="#" class="btn btn-primary">Edit</a>
+    <a href="#" class="btn btn-primary">Delete</a>
   </div>
 </div>
 <br>
 {% endfor %}
 </div>
+
+
+<h2>Your Trade Requests</h2>
+{% for trade in trades %}
+<div class="card" style="width: 20rem;">
+  <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title">Locker ID: {{trade["lockerID"]}}</h4>
+    <p class="card-text">For your locker: {{trade["your_lockerID"]}}</p>
+    <p class="card-text">Sent by: {{trade["from_email"]}}</p>
+    <form method="POST" action="/profile">
+      <input type="hidden" name="lockerID" value='{{trade["lockerID"]}}'>
+      <input type="hidden" name="your_lockerID" value='{{trade["your_lockerID"]}}'>
+      <input type="hidden" name="to_email" value='{{trade["to_email"]}}'>
+      <input type="hidden" name="from_email" value='{{trade["from_email"]}}'>
+      <input type="submit" name="accept" value="Accept" class="btn btn-primary">
+      <input type="submit" name="deny" value="Deny" class="btn btn-primary">
+    </form>
+  </div>
+</div>
+<br>
+{% endfor %}
+</div>
+<br>
+<br>
+<br>
 
 {% endblock %}  

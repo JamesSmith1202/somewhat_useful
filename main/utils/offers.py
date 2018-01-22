@@ -25,7 +25,7 @@ def get_offer(lockerID, type):
     for offer in c:
         price = offer[2]
         description = offer[3]
-        dict = {"lockerID": lockerID, "type": type, "price": price, "description": description}
+        dict = {"lockerID": lockerID, "type": type, "price": price, "description": description, "email": lockers.get_email(lockerID)}
         return dict
     
 # Get price
@@ -91,18 +91,6 @@ def remove_offer(lockerID, type):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     # Delete row with lockerID and type from offers table
-    c.execute("DELETE FROM offers WHERE lockerID = '%s' AND type = %d" % (lockerID, type))
-    db.commit()
-    db.close()
-    return True
-
-# Accept offer - Returns true when complete
-def accept_offer(lockerID, buyer, seller):
-    db = sqlite3.connect("utils/database.db")
-    c = db.cursor()
-    # Transfer ownership
-    lockers.transfer_locker(lockerID, seller, buyer)
-    # Delete offer
     c.execute("DELETE FROM offers WHERE lockerID = '%s' AND type = %d" % (lockerID, type))
     db.commit()
     db.close()

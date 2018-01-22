@@ -52,3 +52,9 @@ edit html
 smithJ -- 2018-01-19 14:55:29
 got canvas resizing and dot placement working for the map
 
+marcusN -- 2018-01-21 20:15:43
+added trade table, trade functions, card UI
+
+marcusN -- 2018-01-21 22:17:01
+trades work
+

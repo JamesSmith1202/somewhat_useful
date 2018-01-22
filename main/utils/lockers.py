@@ -98,7 +98,7 @@ def does_locker_exist(lockerID):
     
     
 # Transfer locker - Return true when complete
-def transfer_locker(lockerID, fromEmail, toEmail):
+def transfer_locker(lockerID, toEmail, fromEmail):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
     # Update locker email to new email
