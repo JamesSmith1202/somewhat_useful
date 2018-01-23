@@ -96,10 +96,10 @@ def display():
             else:
                 print "No locker selected"
                 flash("Please select a locker to trade")
+        data = {'floor': request.args.get("lockerID").split("-")[0], 'coords' : lockers.get_coords(request.args.get("lockerID"))}
         if is_logged():
-            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], floor = request.args.get("lockerID").split("-")[0], coords=lockers.get_coords(request.args.get("lockerID")))
-        
-        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), floor = request.args.get("lockerID").split("-")[0], coords=lockers.get_coords(request.args.get("lockerID")))
+            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], data = data)
+        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), data=data)
     else:
         return redirect(url_for("offer"))
 

@@ -64,3 +64,6 @@ edit offers
 smithJ -- 2018-01-23 04:06:34
 implemented interactive map
 
+smithJ -- 2018-01-23 13:43:46
+more work on implementing javascript maps
+

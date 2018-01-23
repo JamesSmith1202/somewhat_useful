@@ -1,6 +1,4 @@
 var canvas = document.getElementById('myCanvas');
-var floor = {{ floor }};
-var coords = {{ coords }}
 var floorImage = new Image()
 floorImage.src="http://127.0.0.1:5000/static/"+floor+".jpg";
 var mouseX;
@@ -9,7 +7,10 @@ var radius = 10;
 var context = canvas.getContext('2d');
 canvas.width = floorImage.width;
 canvas.height = floorImage.height;
-context.drawImage(floorImage,0,0);
+
+floorImage.onload = function(){
+    context.drawImage(floorImage,0,0);
+}
 
 var placeDot = function(e){
     context.clearRect(0, 0, canvas.width, canvas.height);

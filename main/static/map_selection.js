@@ -9,8 +9,7 @@ var radius = 10;
 var context = canvas.getContext('2d');
 
 var changePic = function(e){
-    console.log("calling");
-    selection = int(drop.options[drop.selectedIndex].value);
+    selection = drop.options[drop.selectedIndex].value;
     context.clearRect(0, 0, canvas.width, canvas.height);
     canvas.width = floors[selection].width;
     canvas.height = floors[selection].height;
@@ -27,8 +26,8 @@ var placeDot = function(e){
     context.arc(mouseX, mouseY, radius, 0, 2 * Math.PI, false);
     context.fillStyle = 'red';
     context.fill();
-    context.lineWidth = 5;
-    context.strokeStyle = '#003300';
+    context.lineWidth = 3;
+    context.strokeStyle = 'black';
     context.stroke();
     coords.value = "["+mouseX+","+mouseY+"]";
 }
@@ -37,6 +36,9 @@ var preloadImages = function(){
     for (i=0;i<11;i++){
         floors[i]=new Image()
         floors[i].src= "http://127.0.0.1:5000/static/" + i + ".jpg";
+    }
+    floors[0].onload = function(){
+        context.drawImage(floors[0],0,0);
     }
 }
 
