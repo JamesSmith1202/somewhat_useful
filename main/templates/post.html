@@ -16,7 +16,11 @@
     <form method="POST" action="/post">
       <div class="form-group">
         <label for="Id"> LockerID </label>
-        <input type="text" name="lockerID" placeholder="Locker">
+        <select name="lockerID" placeholder="Locker">
+          {% for locker in lockers %}
+            <option value= {{ locker["lockerID"] }}>{{ locker["lockerID"] }}</option>
+          {% endfor %}
+          </select>
       </div>
       <div class="form-group">
         <label for="price">Price(if selling) </label>

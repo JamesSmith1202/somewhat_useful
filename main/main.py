@@ -129,7 +129,8 @@ def post():
     if not is_logged():
         return redirect(url_for("login"))
     if request.method == "GET":
-        return render_template("post.html", logged = is_logged())
+        print lockers.get_lockers(session[USER_SESSION])[0]["lockerID"]
+        return render_template("post.html", logged = is_logged(), lockers = lockers.get_lockers(session[USER_SESSION]))
     else:
         offers.create_offer(request.form["lockerID"], int(request.form["type"]), int(request.form["price"]), request.form["desc"])
         return redirect(url_for("offer"))
