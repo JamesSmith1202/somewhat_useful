@@ -15,14 +15,14 @@ Before using website:
     >1b. Click on any selling offer to find out more information.
     >1c. Fill out the email form to contact the owner to set up a sale!
 2. To participate in trading, please create an account through the "login" button at the top of the page
-  >2a. You can register an account at the bottom of the login page
+    >2a. You can register an account at the bottom of the login page
 3. After logging in, you can now trade
-  >3a. You can now click on trading posts and set up a trade
+    >3a. You can now click on trading posts and set up a trade
 4. Click "profile" at the top of the page to view and edit your profile
-  >4a. You may add your lockers through the form on the page
-  >4b. You can also view your lockers and trade requests on this page
+    >4a. You may add your lockers through the form on the page
+    >4b. You can also view your lockers and trade requests on this page
 5. Click "search" at the top of the page to view more offers
-  >5a. You will not see all selling and trading offers
+    >5a. You will not see all selling and trading offers
 6. Click "post" at the top of the page to make a selling or trading offer
-  >6a. Input all neccessary data and post!
+    >6a. Input all neccessary data and post!
 7. Browse around, thank you for using Lockit!
