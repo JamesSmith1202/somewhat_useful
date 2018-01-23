@@ -19,12 +19,12 @@
   </tr>
   <tr>
     <td>
-      <canvas style="border: 1px solid black;" class="box" id="myCanvas"></canvas>
+      <canvas width="1024" height="768" style="border: 1px solid black;" class="box" id="myCanvas"></canvas>
       <script type="text/javascript">
             var floor = {{ data.floor }}
             var coords = {{ data.coords }}
       </script>
-      <script src="/static/display_map.js"></script>
+      <script type="text/javascript" onload="loaded=1" src="/static/display_map.js"></script>
     </td>
   </tr>
 </table>

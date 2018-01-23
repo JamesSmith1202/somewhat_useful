@@ -70,3 +70,6 @@ more work on implementing javascript maps
 smithJ -- 2018-01-23 14:22:22
 got dropdown menu for owned lockers working
 
+smithJ -- 2018-01-23 14:57:30
+got the interactive map completely working
+
