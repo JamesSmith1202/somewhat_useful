@@ -12,11 +12,8 @@ Before using website:
 
 1. Upon loading the site, you will be able to see recent posts for sale and trading
     >1a. You do not need to login to view all these offers.
-    
     >1b. Click on any selling offer to find out more information.
-    
     >1c. Fill out the email form to contact the owner to set up a sale!
-    
 2. To participate in trading, please create an account through the "login" button at the top of the page
   >2a. You can register an account at the bottom of the login page
 3. After logging in, you can now trade
