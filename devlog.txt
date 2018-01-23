@@ -1,6 +1,9 @@
 jamesS -- 2017-12-21 20:05:14
 Initial startup of devlog bash script. Worked on design document and pushed initial materials
 
+leviO -- 2017-12-21 18:09:25
+Added Gmail API and emailing functionality to site
+
 marcusN -- 2017-12-27 09:50:35
 added auth.py
 

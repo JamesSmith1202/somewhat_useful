@@ -135,7 +135,7 @@ def post():
             return redirect(url_for("profile"))
         return render_template("post.html", logged = is_logged(), lockers = lockerList)
     else:
-        offers.create_offer(request.form["lockerID"], int(request.form["type"]), int(request.form["price"]), request.form["desc"])
+        offers.create_offer(request.form["lockerID"], int(request.form["type"]), float(request.form["price"]), request.form["desc"])
         return redirect(url_for("offer"))
 
 @app.route("/profile", methods=["GET", "POST"])
