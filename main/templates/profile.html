@@ -13,10 +13,24 @@
 <form method="POST" action="/profile">
   <input type="text" name="lockerID" placeholder="Locker ID (ex: 2-152)">
   <br>
-  <input type="text" name="floor" placeholder="Floor #">
+  <select id="dropdown">
+    <option value="0">Select a Floor</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
   <br>
-  <input type="text" name="coords" placeholder="Coordinates ex: [0,0]">
-  Map!
+  <input type="text" disabled="disabled" name="coords" id="coords" placeholder="Coordinates ex: [0,0]">
+  <br>
+  <canvas style="border: 1px solid black;" class="box" id="myCanvas"></canvas>
+  <script src="map_selection.js"></script>
   <br>
   <input type="submit" name="add" value="Add Locker">
 </form>

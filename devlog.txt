@@ -61,3 +61,6 @@ trades work
 marcusN -- 2018-01-21 23:14:35
 edit offers
 
+smithJ -- 2018-01-23 04:06:34
+implemented interactive map
+

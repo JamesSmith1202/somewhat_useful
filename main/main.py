@@ -29,6 +29,10 @@ def add_session(username, password):
         flash("Incorrect login credentials")
         return False
 
+def check_id(id):
+    div = id.split("-")
+    return (len(div) == 2 and len(div[0]) == 1 and div[0].isdigit() and div[1].isdigit())
+
 @app.route("/", methods=["GET"])
 def root():
     return render_template('home.html', logged = is_logged(), lockers_selling = offers.get_latest_offers(4,0), lockers_trading = offers.get_latest_offers(4,1))
@@ -93,9 +97,9 @@ def display():
                 print "No locker selected"
                 flash("Please select a locker to trade")
         if is_logged():
-            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION])
+            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], floor = request.args.get("lockerID").split("-")[0], coords=lockers.get_coords(request.args.get("lockerID")))
         
-        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged())
+        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), floor = request.args.get("lockerID").split("-")[0], coords=lockers.get_coords(request.args.get("lockerID")))
     else:
         return redirect(url_for("offer"))
 
@@ -147,11 +151,14 @@ def profile():
             offers.remove_offer(request.form["lockerID"], 0)
             offers.remove_offer(request.form["lockerID"], 1)              
         else:
-            locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
-            if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
-                return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
+            if(check_id(request.form["lockerID"])):
+                locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
+                if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
+                    return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
+                else:
+                    flash("Locker exists")
             else:
-                flash("Locker exists")
+                flash("Locker-ID is in an incorrect format")
     return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
 
 if __name__ == "__main__":
