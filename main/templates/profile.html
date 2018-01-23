@@ -13,7 +13,7 @@
 <form method="POST" action="/profile">
   <input type="text" name="lockerID" placeholder="Locker ID (ex: 2-152)">
   <br>
-  <select id="dropdown">
+  <select id="dropdown" name="floor">
     <option value="0">Select a Floor</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -27,7 +27,7 @@
     <option value="10">10</option>
   </select>
   <br>
-  <input type="text" disabled="disabled" name="coords" id="coords" placeholder="Coordinates ex: [0,0]">
+  <input type="text" readonly="readonly" name="coords" id="coords" placeholder="[0,0]">
   <br>
   <canvas width="1024" height="768" style="border: 1px solid black;" class="box" id="myCanvas"></canvas>
   <script type="text/javascript" onload="loaded=1" src="static/map_selection.js"></script>
