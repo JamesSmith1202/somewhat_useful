@@ -10,6 +10,12 @@
     <li>User will be able to change their password</li>
 </ul>
 
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<center><font color="red">{{ message }}</font></center><br>
+{% endfor %}
+{% endwith %}
+
 <form method="POST" action="/profile">
   <input type="text" name="lockerID" placeholder="Locker ID (ex: 2-152)">
   <br>
@@ -34,12 +40,6 @@
   <br>
   <input type="submit" name="add" value="Add Locker">
 </form>
-
-{% with messages = get_flashed_messages() %}
-{% for message in messages %}
-<center><font color="red">{{ message }}</font></center><br>
-{% endfor %}
-{% endwith %}
     
 <br>
 

@@ -129,8 +129,11 @@ def post():
     if not is_logged():
         return redirect(url_for("login"))
     if request.method == "GET":
-        print lockers.get_lockers(session[USER_SESSION])[0]["lockerID"]
-        return render_template("post.html", logged = is_logged(), lockers = lockers.get_lockers(session[USER_SESSION]))
+        lockerList = lockers.get_lockers(session[USER_SESSION])
+        if len(lockerList) == 0:
+            flash("You must add a locker to your account before you post")
+            return redirect(url_for("profile"))
+        return render_template("post.html", logged = is_logged(), lockers = lockerList)
     else:
         offers.create_offer(request.form["lockerID"], int(request.form["type"]), int(request.form["price"]), request.form["desc"])
         return redirect(url_for("offer"))
@@ -153,8 +156,12 @@ def profile():
             offers.remove_offer(request.form["lockerID"], 1)              
         else:
             if(check_id(request.form["lockerID"])):
+                if(request.form["lockerID"].split("-")[0] != request.form["floor"]):
+                    flash("Locker ID does not match with the selected floor")
+                    return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
                 locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
                 if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):
+                    flash("Locker successfully added")
                     return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
                 else:
                     flash("Locker exists")
