@@ -121,7 +121,11 @@ def edit():
             offers.remove_offer(lockerID, int(type))
         else:
             dict = {"lockerID": request.form["lockerID"], "price": request.form["price"], "type": request.form["type"], "description": request.form["description"]}
-            return render_template("edit.html", offer = dict, logged = is_logged())
+            lockerList = lockers.get_lockers(session[USER_SESSION])
+            if len(lockerList) == 0:
+                flash("You must add a locker to your account before you post")
+                return redirect(url_for("profile"))
+            return render_template("edit.html", offer = dict, logged = is_logged(), lockers = lockerList)
     return redirect(url_for("offer"))
 
 @app.route("/post", methods=["GET", "POST"])

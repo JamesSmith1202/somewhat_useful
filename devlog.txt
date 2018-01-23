@@ -76,3 +76,6 @@ got dropdown menu for owned lockers working
 smithJ -- 2018-01-23 14:57:30
 got the interactive map completely working
 
+smithJ -- 2018-01-23 15:09:45
+added dropdown to edit menu
+
