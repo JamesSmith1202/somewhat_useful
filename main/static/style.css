@@ -88,3 +88,15 @@ nav-item {
 	
 	margin-top: 0px;
 }
+
+html,body{ margin:0; padding:0; height:100%; width:100%; }
+
+#bodyborder {
+    POSITION: FIXED;
+    height:97%;
+    width:100%;
+    border: 20px solid green;  
+    border-image-source: linear-gradient(#325568, #7aa2b3);
+    border-image-slice: 20;
+    overflow:auto;
+}

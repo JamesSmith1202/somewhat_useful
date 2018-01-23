@@ -15,7 +15,7 @@
 </head>
 <body>
 
-
+<div id="bodyborder">
   <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -78,13 +78,10 @@
 </style>
 
 <div class="footer" style="background-color: #7aa2b3;">
-  <p class="footerhdr">
-    Lock-It <br>
+  <p  style="padding-top: 6px; font-size: 10px;">
     James Smith, Marcus Ng, Levi Olevsky, and Ray Jones<br>
-    Softdev Project 2<br>
-  </p>
-
-
+    Softdev Project 2
+ 
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -92,6 +89,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
       {% block customscript %}
       {% endblock %}
-</body>
+</div></body>
 
 </html>
