@@ -29,6 +29,12 @@ def add_session(username, password):
         flash("Incorrect login credentials")
         return False
 
+def is_float(string):
+  try:
+    return float(string)
+  except ValueError:  # String is not a number
+    return False
+
 def check_id(id):
     div = id.split("-")
     return (len(div) == 2 and len(div[0]) == 1 and div[0].isdigit() and div[1].isdigit())
@@ -135,14 +141,20 @@ def edit():
 def post():
     if not is_logged():
         return redirect(url_for("login"))
+    lockerList = lockers.get_lockers(session[USER_SESSION])
+    if len(lockerList) == 0:
+        flash("You must add a locker to your account before you post")
+        return redirect(url_for("profile"))
     if request.method == "GET":
-        lockerList = lockers.get_lockers(session[USER_SESSION])
-        if len(lockerList) == 0:
-            flash("You must add a locker to your account before you post")
-            return redirect(url_for("profile"))
         return render_template("post.html", logged = is_logged(), lockers = lockerList)
     else:
-        offers.create_offer(request.form["lockerID"], int(request.form["type"]), float(request.form["price"]), request.form["desc"])
+        if(is_float(request.form["price"])):
+            offers.create_offer(request.form["lockerID"], int(request.form["type"]), float(request.form["price"]), request.form["desc"])
+        elif(int(request.form["type"])==1):
+            offers.create_offer(request.form["lockerID"], int(request.form["type"]), 0, request.form["desc"])
+        else:
+            flash("Error: Price in incorrect format");
+            return render_template("post.html", logged = is_logged(), lockers = lockerList)
         return redirect(url_for("offer"))
 
 @app.route("/profile", methods=["GET", "POST"])
