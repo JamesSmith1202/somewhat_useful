@@ -48,7 +48,7 @@ def accept_trade(lockerID, your_lockerID, to_email, from_email):
 def remove_trade(lockerID, your_lockerID, to_email, from_email):
     db = sqlite3.connect("utils/database.db")
     c = db.cursor()
-    c.execute("DELETE FROM trades WHERE lockerID = '%s' AND your_lockerID = '%s' AND to_email = '%s' AND from_email = '%s'" % (your_lockerID, lockerID, to_email, from_email))
+    c.execute("DELETE FROM trades WHERE lockerID = '%s'" % (your_lockerID))
     db.commit()
     db.close()
     return True
