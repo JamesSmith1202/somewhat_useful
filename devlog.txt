@@ -79,3 +79,6 @@ got the interactive map completely working
 smithJ -- 2018-01-23 15:09:45
 added dropdown to edit menu
 
+smithJ -- 2018-01-23 20:56:43
+added searching by locker number
+

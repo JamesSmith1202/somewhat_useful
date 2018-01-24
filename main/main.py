@@ -101,7 +101,6 @@ def display():
             lockerList = lockers.get_lockers(session[USER_SESSION])
             if len(lockerList) == 0:
                 flash("You must add a locker to your account before you can trade")
-                return redirect(url_for("profile"))
             return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], data = data, lockers = lockerList)
         return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), data=data)
     else:
