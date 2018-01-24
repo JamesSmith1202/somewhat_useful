@@ -112,6 +112,18 @@ def display():
     else:
         return redirect(url_for("offer"))
 
+@app.route("/contact", methods=["POST"])
+def contact():
+    if request.form["email"] != "":
+        to = request.form["to"]
+        sender = ""
+        subject = request.form["subject"]
+        msgHtml = request.form["message"]
+        msgPlain = ""
+        quickstart.SendMessage(sender, to, subject, msgHtml, msgPlain)
+    flash("Email Sent")
+    return redirect(url_for("display"))
+    
 @app.route("/edit", methods=["POST"])
 def edit():
     if request.method == "POST":

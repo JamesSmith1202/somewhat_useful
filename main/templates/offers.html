@@ -1,6 +1,13 @@
 {% extends "template.html" %}
 {%block title %}Search Lockers{% endblock %}
 {%block content %}
+
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+<br><center><font color="red">{{ message }}</font></center><br>
+{% endfor %}
+{% endwith %}
+
 <br>
 <h1>Search</h1>
 <div class="card-block">
