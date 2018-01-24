@@ -10,9 +10,23 @@
 {% endfor %}
 
 {% endwith %}
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#log" role="tab">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " data-toggle="tab" href="#cre" role="tab">Create Account</a>
+      </li>
 
+    </ul>
+  </div>
 
-<div id="left"> <h2 class="text-center"> Log In </h2>
+  <div class="tab-content" style="height: 150%">
+    
+  <div class="tab-pane active" id="log" role="tabpanel">
+ <br><h2 class="text-center"> Login </h2>
 
   <div class="modal-body row">
     <div class="col-md-4"></div>
@@ -28,17 +42,16 @@
 	</div>
 	<input class="btn btn-info btn-block" type="submit" name="form" value="Login">
       </form>
-      <p style="padding-top: 10px;" id="toggle">Don't have an account? Create one
-	<span id="linkit"> Here! </span></p>
-</div></p>
+ 
+</div>
 <div class="col-md-4"></div>
 </div> </div>
+  
 
-
-
-
-
-<div id="right"> <h2 class="text-center"> Create Account </h2>
+  
+  <div class="tab-pane" id="cre" role="tabpanel">
+<br>
+ <h2 class="text-center"> Create Account </h2>
   <br>
   <div class="modal-body row">
     <div class="col-md-4"></div>
@@ -58,11 +71,17 @@
 	</div>
 	<button class="btn btn-primary btn-block" type="submit" name="form" value="create">Submit</button>
       </form>
-      <p style="padding-top: 10px;" id="toggle">Back to 
-	<span id="linkit"> Login! </span>
-</div></p>
+</div>
 <div class="col-md-4"></div>
 </div> </div>
+  
+
+
+
+
+
+
+
 
 
 
