@@ -151,7 +151,7 @@ def post():
         if(is_float(request.form["price"])):
             offers.create_offer(request.form["lockerID"], int(request.form["type"]), float(request.form["price"]), request.form["desc"])
         elif(int(request.form["type"])==1):
-            offers.create_offer(request.form["lockerID"], int(request.form["type"]), 0, request.form["desc"])
+            offers.create_offer(request.form["lockerID"], int(request.form["type"]), float(0), request.form["desc"])
         else:
             flash("Error: Price in incorrect format");
             return render_template("post.html", logged = is_logged(), lockers = lockerList)
