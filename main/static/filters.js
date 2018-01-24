@@ -1,5 +1,5 @@
 var searchbar = document.getElementById("searchLocker");
-var cards = document.getElementsByClassName("card");
+var cards = document.getElementsByClassName("card-block container");
 
 var search = function(e){
     var title;

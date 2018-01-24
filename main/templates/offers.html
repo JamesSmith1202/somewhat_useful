@@ -15,7 +15,7 @@ Search by Locker Number:</b>
 <div class="card-deck">
   {% for locker in offers %}
   {% if locker["type"] == 0 %}
-  <div class="card-block" style="width: 20rem; padding-bottom: 50px;">
+  <div class="card-block container" style="width: 20rem; padding-bottom: 50px;">
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
@@ -32,7 +32,7 @@ Search by Locker Number:</b>
 <div class="card-deck">
   {% for locker in offers %}
   {% if locker["type"] == 1 %}
-  <div class="card-block" style="width: 20rem; padding-bottom: 50px;">
+  <div class="card-block container" style="width: 20rem; padding-bottom: 50px;">
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
