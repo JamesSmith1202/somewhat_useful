@@ -98,7 +98,11 @@ def display():
                 flash("Please select a locker to trade")
         data = {'floor': request.args.get("lockerID").split("-")[0], 'coords' : lockers.get_coords(request.args.get("lockerID"))}
         if is_logged():
-            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], data = data)
+            lockerList = lockers.get_lockers(session[USER_SESSION])
+            if len(lockerList) == 0:
+                flash("You must add a locker to your account before you can trade")
+                return redirect(url_for("profile"))
+            return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], data = data, lockers = lockerList)
         return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), data=data)
     else:
         return redirect(url_for("offer"))
@@ -162,6 +166,9 @@ def profile():
             if(check_id(request.form["lockerID"])):
                 if(request.form["lockerID"].split("-")[0] != request.form["floor"]):
                     flash("Locker ID does not match with the selected floor")
+                    return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
+                if(len(request.form["coords"]) == 0):
+                    flash("Please select a locker location on the map")
                     return render_template("profile.html", logged = is_logged(), username = session[USER_SESSION], lockers = lockers.get_lockers(session[USER_SESSION]), trades = trades.get_your_trades(session[USER_SESSION]))
                 locker = {"lockerID": request.form["lockerID"], "email": session[USER_SESSION], "floor": request.form["floor"], "coords": request.form["coords"]}
                 if lockers.create_locker(locker["lockerID"], locker["email"], int(locker["floor"]), locker["coords"]):

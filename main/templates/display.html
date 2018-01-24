@@ -42,10 +42,18 @@
 <br>
 
 {% if offer["type"] == 1 %}
-<form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
-  <input type="text" name="your_lockerID" placeholder="Your LockerID">
-  <input type="submit" name="send" value="Send Trade Request">
-</form>
+  {% if logged %}
+    <form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
+      <select name="your_lockerID" placeholder="Your LockerID">
+        {% for locker in lockers %}
+          <option value= {{ locker["lockerID"] }}>{{ locker["lockerID"] }}</option>
+        {% endfor %}
+        </select>
+      <input type="submit" name="send" value="Send Trade Request">
+    </form>
+  {% else %}
+    <a href="/login">To send a trade request you must log in here</a>
+  {% endif %}
 {% endif %}
 
 <br>
