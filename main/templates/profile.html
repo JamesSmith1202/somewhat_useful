@@ -1,20 +1,68 @@
 {% extends "template.html" %}
 {% block title %}{{username}}'s Profile{% endblock %}
 {% block content %}
+<br>
 <h1>{{username}}'s profile</h1>
-<ul>
-    <li>Will diplay all lockers owned by the user</li>
-    <li>The user will be able to edit the info about the locker.</li>
-    <li>Will be able to remove and add lockers</li>
-    <li>Will display trade requests</li>
-    <li>User will be able to change their password</li>
-</ul>
 
 {% with messages = get_flashed_messages() %}
 {% for message in messages %}
 <center><font color="red">{{ message }}</font></center><br>
 {% endfor %}
 {% endwith %}
+<br>
+<script>
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+
+</script>
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#yours" role="tab">Your Lockers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " data-toggle="tab" href="#add" role="tab">Add a Locker</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " data-toggle="tab" href="#record" role="tab">Record Sold Lockers</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#requests" role="tab">Your Trade Requests</a>
+      </li>
+    </ul>
+  </div>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="yours" role="tabpanel">
+
+    <br>
+<h2>Your Lockers</h2>
+
+<div class="card-deck">
+{% for locker in lockers %}
+<div class="card-block" style="width: 30rem;">
+  <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
+  <div class="card-block">
+    <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
+    <p class="card-text">Floor: {{locker["floor"]}}</p>
+    <form method="POST" action="/profile">
+      <input type="hidden" name="lockerID" value='{{locker["lockerID"]}}'>
+      <input type="submit" name="delete" value="Delete" class="btn btn-primary">
+    </form>
+  </div>
+</div>
+<br>
+{% endfor %}
+</div>
+<br>
+  </div>
+  <div class="tab-pane" id="add" role="tabpanel">
+    <br>
+<h2>Add a Locker</h2>
 
 <form method="POST" action="/profile">
   <input type="text" name="lockerID" placeholder="Locker ID (ex: 2-152)">
@@ -41,28 +89,9 @@
   <input type="submit" name="add" value="Add Locker">
 </form>
     
-<br>
-
-<h2>Your Lockers</h2>
-
-<div class="card-deck">
-{% for locker in lockers %}
-<div class="card" style="width: 20rem;">
-  <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
-  <div class="card-block">
-    <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
-    <p class="card-text">Floor: {{locker["floor"]}}</p>
-    <form method="POST" action="/profile">
-      <input type="hidden" name="lockerID" value='{{locker["lockerID"]}}'>
-      <input type="submit" name="delete" value="Delete" class="btn btn-primary">
-    </form>
-  </div>
-</div>
-<br>
-{% endfor %}
-</div>
-<br>
-<h3>Sell Lockers</h3>
+<br></div>
+  <div class="tab-pane" id="record" role="tabpanel">
+<br><h3>Record Sold Lockers</h3>
 If you have sold a locker, please fill out this form:<br>
 <form method="POST" action="/profile">
   <select name="lockerID" placeholder="Locker">
@@ -74,8 +103,9 @@ If you have sold a locker, please fill out this form:<br>
   <input type="text" name="email" placeholder="email"><br>
   <input type="submit" name="Sell Locker" value="Transfer ownership">
 </form>
-  <br><br>
-
+  <br><br></div>
+  <div class="tab-pane" id="requests" role="tabpanel">
+  
 <h2>Your Trade Requests</h2>
 {% for trade in trades %}
 <div class="card" style="width: 20rem;">
@@ -100,5 +130,11 @@ If you have sold a locker, please fill out this form:<br>
 <br>
 <br>
 <br>
+</div>
+</div>
+
+
+
+
 
 {% endblock %}  

@@ -13,7 +13,7 @@ Home
 <h2>Selling</h2>
 <div class="card-deck">
   {% for locker in lockers_selling %}
-  <div class="card" style="width: 20rem;">
+  <div class="card-block" style="width: 20rem;">
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
@@ -30,7 +30,7 @@ Home
 <h2>Trading</h2>
 <div class="card-deck">
   {% for locker in lockers_trading %}
-  <div class="card" style="width: 20rem;">
+  <div class="card-block" style="width: 20rem;">
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>

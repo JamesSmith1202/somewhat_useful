@@ -1,24 +1,21 @@
 {% extends "template.html" %}
 {%block title %}Search Lockers{% endblock %}
 {%block content %}
-<ul>
-        <li>Shows locker posts in a grid layout</li>
-        <li>Search bar to search for specific locker numbers</li>
-        <li>Options to sort lockers by price and floor</li>
-        <li>Clicking on a locker goes to a page to display all locker information</li>
-</ul>
-
-Search by Locker Number:
 <br>
-<input type="text" id= "searchLocker" name="searchLocker">
+<h1>Search</h1>
+<div class="card-block">
+<center><b>
+Search by Locker Number:</b>
+<input style="width: 50%;" type="text" id= "searchLocker" name="searchLocker"></center>
 <script type="text/javascript" src="/static/filters.js"></script>
+</div>
 
 <h2>Selling</h2>
 
 <div class="card-deck">
   {% for locker in offers %}
   {% if locker["type"] == 0 %}
-  <div class="card" style="width: 20rem; padding-bottom: 50px;">
+  <div class="card-block" style="width: 20rem; padding-bottom: 50px;">
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
@@ -35,7 +32,7 @@ Search by Locker Number:
 <div class="card-deck">
   {% for locker in offers %}
   {% if locker["type"] == 1 %}
-  <div class="card" style="width: 20rem; padding-bottom: 50px;">
+  <div class="card-block" style="width: 20rem; padding-bottom: 50px;">
     <img class="card-img-top" src="static/locker.jpg" alt="Card image cap">
     <div class="card-block">
       <h4 class="card-title">Locker ID: {{locker["lockerID"]}}</h4>
