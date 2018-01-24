@@ -1,2 +1,3 @@
 Merged signup and login into one page
 Got rid of offerID in DB
+Removed filtering in locker search

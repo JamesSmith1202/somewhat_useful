@@ -85,3 +85,6 @@ added searching by locker number
 marcusN -- 2018-01-23 21:15:41
 fixed trade bug
 
+leviO -- 2018-01-23 22:17:10
+can transfer sold lockers now
+
