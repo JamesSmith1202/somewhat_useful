@@ -133,20 +133,18 @@ def edit():
         description = request.form["description"]
         if "update" in request.form:
             print "Update offer"
+            print price
+            if "." in price:
+                price = price.split('.')[0]
             offers.set_price(lockerID, int(type), int(price))
             offers.set_type(lockerID, int(type), int(request.form["new_type"]))
             offers.set_description(lockerID, int(type), description)
-            offers.set_lockerID(lockerID, int(type), request.form["new_lockerID"])
         elif "delete" in request.form:
             print "Delete Offer"
             offers.remove_offer(lockerID, int(type))
         else:
             dict = {"lockerID": request.form["lockerID"], "price": request.form["price"], "type": request.form["type"], "description": request.form["description"]}
-            lockerList = lockers.get_lockers(session[USER_SESSION])
-            if len(lockerList) == 0:
-                flash("You must add a locker to your account before you post")
-                return redirect(url_for("profile"))
-            return render_template("edit.html", offer = dict, logged = is_logged(), lockers = lockerList)
+            return render_template("edit.html", offer = dict, logged = is_logged())
     return redirect(url_for("offer"))
 
 @app.route("/post", methods=["GET", "POST"])
