@@ -41,7 +41,7 @@
 
 <br>
 
-{% if offer["type"] == 1 %}
+{% if offer["type"] == 1 and offer["email"] != current_user_email %}
   {% if logged %}
 <form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
       <select name="your_lockerID" placeholder="Your LockerID">
