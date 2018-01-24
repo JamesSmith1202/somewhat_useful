@@ -61,7 +61,20 @@
 <br>
 {% endfor %}
 </div>
-
+<br>
+<h3>Sell Lockers</h3>
+If you have sold a locker, please fill out this form:<br>
+<form method="POST" action="/profile">
+  <select name="lockerID" placeholder="Locker">
+    {% for locker in lockers %}
+    <option value= {{ locker["lockerID"] }}>{{ locker["lockerID"] }}</option>
+    {% endfor %}
+  </select>
+  <br>
+  <input type="text" name="email" placeholder="email"><br>
+  <input type="submit" name="Sell Locker" value="sold">
+</form>
+  <br><br>
 
 <h2>Your Trade Requests</h2>
 {% for trade in trades %}

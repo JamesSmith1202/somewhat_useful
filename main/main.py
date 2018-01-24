@@ -96,7 +96,7 @@ def display():
                 msgPlain = ""
                 quickstart.SendMessage(sender, to, subject, msgHtml, msgPlain)
                 return redirect(url_for("display"))
-        
+            
         if is_logged():
             lockerList = lockers.get_lockers(session[USER_SESSION])
             if len(lockerList) == 0:
@@ -160,7 +160,9 @@ def profile():
             print "Delete locker"
             lockers.remove_locker(request.form["lockerID"])
             offers.remove_offer(request.form["lockerID"], 0)
-            offers.remove_offer(request.form["lockerID"], 1)              
+            offers.remove_offer(request.form["lockerID"], 1)
+        elif "Sell Locker" in request.form:
+            lockers.transfer_locker(request.form["lockerID"], request.form["email"], session[USER_SESSION])
         else:
             if(check_id(request.form["lockerID"])):
                 if(request.form["lockerID"].split("-")[0] != request.form["floor"]):
