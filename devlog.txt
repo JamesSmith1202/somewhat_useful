@@ -82,3 +82,6 @@ added dropdown to edit menu
 smithJ -- 2018-01-23 20:56:43
 added searching by locker number
 
+marcusN -- 2018-01-23 21:15:41
+fixed trade bug
+

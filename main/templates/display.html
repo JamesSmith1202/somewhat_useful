@@ -43,7 +43,7 @@
 
 {% if offer["type"] == 1 %}
   {% if logged %}
-    <form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
+<form method="POST" action='{{"/display?lockerID="~offer["lockerID"] + "&type="~offer["type"]}}'>
       <select name="your_lockerID" placeholder="Your LockerID">
         {% for locker in lockers %}
           <option value= {{ locker["lockerID"] }}>{{ locker["lockerID"] }}</option>

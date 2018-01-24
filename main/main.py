@@ -71,7 +71,23 @@ def offer():
 @app.route("/display", methods=["GET", "POST"])
 def display():
     if "lockerID" in request.args and "type" in request.args:
+        data = {'floor': request.args.get("lockerID").split("-")[0], 'coords' : lockers.get_coords(request.args.get("lockerID"))}
         if request.method == "POST":
+            if request.form["your_lockerID"] != "":
+                lockerID = request.args.get("lockerID")
+                to_email = lockers.get_email(lockerID)
+                if to_email != session[USER_SESSION]:
+                    if trades.create_trade(lockerID, request.form["your_lockerID"], to_email, session[USER_SESSION]):
+                        print "Trade Request Sent"
+                        flash("Trade request sent")
+                        lockerList = lockers.get_lockers(session[USER_SESSION])
+                        return render_template("display.html", offer = offers.get_offer(request.args.get("lockerID"),int(request.args.get("type"))), logged = is_logged(), current_user_email = session[USER_SESSION], data = data, lockers = lockerList)
+                    else:
+                        print "Error: Request exists!"
+                        flash("Error sending trade request: Request exists!")
+                else:
+                    print "Error: This is your offer!"
+                    flash("Error sending trade request: This is your offer!")
             if request.form["email"] != "":
                 to = request.form["to"]
                 sender = ""
@@ -80,23 +96,7 @@ def display():
                 msgPlain = ""
                 quickstart.SendMessage(sender, to, subject, msgHtml, msgPlain)
                 return redirect(url_for("display"))
-            if request.form["your_lockerID"] != "":
-                lockerID = request.args.get("lockerID")
-                to_email = lockers.get_email(lockerID)
-                if to_email != session[USER_SESSION]:
-                    if trades.create_trade(lockerID, request.form["your_lockerID"], to_email, session[USER_SESSION]):
-                        print "Trade Request Sent"
-                        flash("Trade request sent")
-                    else:
-                        print "Error: Request exists!"
-                        flash("Error sending trade request: Request exists!")
-                else:
-                    print "Error: This is your offer!"
-                    flash("Error sending trade request: This is your offer!")
-            else:
-                print "No locker selected"
-                flash("Please select a locker to trade")
-        data = {'floor': request.args.get("lockerID").split("-")[0], 'coords' : lockers.get_coords(request.args.get("lockerID"))}
+        
         if is_logged():
             lockerList = lockers.get_lockers(session[USER_SESSION])
             if len(lockerList) == 0:
