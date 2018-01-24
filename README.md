@@ -40,3 +40,6 @@ Before using website:
     >6a. Input all neccessary data and post!
     
 7. Browse around, thank you for using Lockit!
+
+##### Bugs
+- GMail Auth page occasionally doesnt load, user must click link from terminal to proceed to authorization
