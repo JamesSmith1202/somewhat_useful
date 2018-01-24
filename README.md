@@ -6,8 +6,8 @@ Lockit offers you an easy way to buy, sell, or trade lockers. Users are able to 
 
 Before using website: 
   - pip install --upgrade google-api-python-client
-  - move the client_secret.json file to the root directory of the site
-  
+  - move the client_secret.json file to the root directory of the repo
+ 
 #### Website Instructions
 
 1. Upon loading the site, you will be able to see recent posts for sale and trading
